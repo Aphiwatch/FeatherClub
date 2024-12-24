@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    image: frontend:1.0.0
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    restart: always
+
+  backend:
+    build: ./backend
+    image: backend:1.0.0
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+      - /app/tmp
+    restart: always
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${FEATHER_DB_DATABASE}
+      POSTGRES_USER: ${FEATHER_DB_USERNAME}
+      POSTGRES_PASSWORD: ${FEATHER_DB_PASSWORD}
+    ports:
+      - "${FEATHER_DB_PORT}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
