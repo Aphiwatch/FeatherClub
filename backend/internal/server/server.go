@@ -1,17 +1,20 @@
-package main
+package server
 
 import (
-	"net/http"
+	"backend/internal/routes"
+	"log"
 
 	"github.com/labstack/echo/v4"
 )
 
-func main() {
+func StartServer() {
 	e := echo.New()
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World Golang!")
-	})
+	// กำหนด route
+	routes.RegisterRoutes(e)
 
-	e.Logger.Fatal(e.Start(":8080"))
+	log.Println("Server is running on :8080")
+	if err := e.Start(":8080"); err != nil {
+		log.Fatal(err)
+	}
 }

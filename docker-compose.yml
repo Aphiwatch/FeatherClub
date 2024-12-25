@@ -1,15 +1,15 @@
 version: '3.8'
 
 services:
-  frontend:
-    build: ./frontend
-    image: frontend:1.0.0
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    restart: always
+  # frontend:
+  #   build: ./frontend
+  #   image: frontend:1.0.0
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./frontend:/app
+  #     - /app/node_modules
+  #   restart: always
 
   backend:
     build: ./backend
@@ -20,6 +20,8 @@ services:
       - ./backend:/app
       - /app/tmp
     restart: always
+    depends_on:
+      - db
 
   db:
     image: postgres:16

@@ -1,13 +1,11 @@
 package main
 
 import (
-	"log"
-	"net/http"
-
 	"backend/internal/server"
+	"log"
 )
 
 func main() {
-	r := server.SetupRouter()
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Println("Starting server...")
+	server.StartServer()
 }
