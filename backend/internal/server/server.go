@@ -2,7 +2,9 @@ package server
 
 import (
 	"backend/internal/routes"
-	"log"
+
+	"backend/internal/database"
+	"fmt"
 
 	"github.com/labstack/echo/v4"
 )
@@ -11,10 +13,14 @@ func StartServer() {
 	e := echo.New()
 
 	// กำหนด route
-	routes.RegisterRoutes(e)
+	routes.SetupRoutes(e)
 
-	log.Println("Server is running on :8080")
-	if err := e.Start(":8080"); err != nil {
-		log.Fatal(err)
+	db, err := database.ConnectDB()
+	if err != nil {
+		fmt.Println("Error connecting to database:", err)
+		return
 	}
+	defer db.Close()
+
+	e.Logger.Fatal(e.Start(":8080"))
 }

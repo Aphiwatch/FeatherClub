@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  frontend:
+    image: frontend:1.0.0
+    ports:
+      - "80:3000"
+    restart: always
+    depends_on:
+      - backend
+
+  backend:
+    image: backend:1.0.0
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      AIR_ENV_PATH: /app/internal/config/.env 
+      APP_ENV: production 
+    restart: always
+
+  db:
+    ports:
+      - "${FEATHER_DB_PORT}:5432" 
+    restart: always

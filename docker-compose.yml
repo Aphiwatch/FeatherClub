@@ -19,6 +19,8 @@ services:
     volumes:
       - ./backend:/app
       - /app/tmp
+    env_file:
+      - .env
     restart: always
     depends_on:
       - db
@@ -33,6 +35,9 @@ services:
       - "${FEATHER_DB_PORT}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      #when dev use mockdata.sql
+      - ./backend/mockdata.sql:/docker-entrypoint-initdb.d/mockdata.sql:ro
+    restart: always
 
 volumes:
   pgdata: {}
