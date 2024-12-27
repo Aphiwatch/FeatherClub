@@ -1,42 +1,76 @@
 -- Classes table
 CREATE TABLE classes (
+    id SERIAL PRIMARY KEY
+);
+
+CREATE TABLE class_translations (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    class_id INTEGER REFERENCES classes(id) ON DELETE CASCADE,
+    language_code VARCHAR(10) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    UNIQUE (class_id, language_code)
 );
 
 -- Subclasses table
 CREATE TABLE subclasses (
     id SERIAL PRIMARY KEY,
+    parent_class_id INTEGER REFERENCES classes(id) ON DELETE CASCADE
+);
+
+CREATE TABLE subclass_translations (
+    id SERIAL PRIMARY KEY,
+    subclass_id INTEGER REFERENCES subclasses(id) ON DELETE CASCADE,
+    language_code VARCHAR(10) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    parent_class_id INTEGER REFERENCES classes(id)
+    UNIQUE (subclass_id, language_code)
 );
 
 -- Taxonomic Orders table
 CREATE TABLE taxonomic_orders (
     id SERIAL PRIMARY KEY,
+    parent_subclass_id INTEGER REFERENCES subclasses(id) ON DELETE CASCADE
+);
+
+CREATE TABLE taxonomic_order_translations (
+    id SERIAL PRIMARY KEY,
+    taxonomic_order_id INTEGER REFERENCES taxonomic_orders(id) ON DELETE CASCADE,
+    language_code VARCHAR(10) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    parent_subclass_id INTEGER REFERENCES subclasses(id)
+    UNIQUE (taxonomic_order_id, language_code)
 );
 
 -- Families table
 CREATE TABLE families (
     id SERIAL PRIMARY KEY,
+    parent_order_id INTEGER REFERENCES taxonomic_orders(id) ON DELETE CASCADE
+);
+
+CREATE TABLE family_translations (
+    id SERIAL PRIMARY KEY,
+    family_id INTEGER REFERENCES families(id) ON DELETE CASCADE,
+    language_code VARCHAR(10) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    parent_order_id INTEGER REFERENCES taxonomic_orders(id)
+    UNIQUE (family_id, language_code)
 );
 
 -- Genera table
 CREATE TABLE genera (
     id SERIAL PRIMARY KEY,
+    parent_family_id INTEGER REFERENCES families(id) ON DELETE CASCADE
+);
+
+CREATE TABLE genus_translations (
+    id SERIAL PRIMARY KEY,
+    genus_id INTEGER REFERENCES genera(id) ON DELETE CASCADE,
+    language_code VARCHAR(10) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    parent_family_id INTEGER REFERENCES families(id)
+    UNIQUE (genus_id, language_code)
 );
 
 -- Species table
 CREATE TABLE species (
     id SERIAL PRIMARY KEY,
     scientific_name VARCHAR(255) NOT NULL,
-    common_name VARCHAR(255),
     iucn_status VARCHAR(255),
     conservation_status VARCHAR(255),
     estimated_population VARCHAR(255),
@@ -56,27 +90,48 @@ CREATE TABLE species (
     eggs_per_chick INTEGER,
     clutch_duration VARCHAR(50),
     chick_ready_to_sea VARCHAR(50),
-    parent_genus_id INTEGER REFERENCES genera(id)
+    parent_genus_id INTEGER REFERENCES genera(id) ON DELETE CASCADE
 );
 
--- Insert Basic Data
+CREATE TABLE species_translations (
+    id SERIAL PRIMARY KEY,
+    species_id INTEGER REFERENCES species(id) ON DELETE CASCADE,
+    language_code VARCHAR(10) NOT NULL,
+    common_name VARCHAR(255),
+    UNIQUE (species_id, language_code)
+);
 
--- Classes
-INSERT INTO classes (name) VALUES ('Mammalia');
-INSERT INTO classes (name) VALUES ('Aves');
-INSERT INTO classes (name) VALUES ('Reptilia');
-INSERT INTO classes (name) VALUES ('Amphibia');
-INSERT INTO classes (name) VALUES ('Insecta');
-INSERT INTO classes (name) VALUES ('Fungi');
-INSERT INTO classes (name) VALUES ('Plantae');
-INSERT INTO classes (name) VALUES ('Protozoa');
+-- Insert Basic Data (ตัวอย่างการเพิ่มข้อมูล)
 
--- Subclasses
+-- Classes and Translations
+INSERT INTO classes DEFAULT VALUES;
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'en', 'Mammalia');
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'th', 'สัตว์เลี้ยงลูกด้วยนม');
 
--- Taxonomic Orders
+INSERT INTO classes DEFAULT VALUES;
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'en', 'Aves');
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'th', 'นก');
 
--- Families
+INSERT INTO classes DEFAULT VALUES;
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'en', 'Reptilia');
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'th', 'สัตว์เลื้อยคลาน');
 
--- Genera
+INSERT INTO classes DEFAULT VALUES;
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'en', 'Amphibia');
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'th', 'สัตว์ครึ่งบกครึ่งน้ำ');
 
--- Species
+INSERT INTO classes DEFAULT VALUES;
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'en', 'Insecta');
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'th', 'แมลง');
+
+INSERT INTO classes DEFAULT VALUES;
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'en', 'Fungi');
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'th', 'เห็ดรา');
+
+INSERT INTO classes DEFAULT VALUES;
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'en', 'Plantae');
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'th', 'พืช');
+
+INSERT INTO classes DEFAULT VALUES;
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'en', 'Protozoa');
+INSERT INTO class_translations (class_id, language_code, name) VALUES ((SELECT id FROM classes ORDER BY id DESC LIMIT 1), 'th', 'โพรโทซัว');
