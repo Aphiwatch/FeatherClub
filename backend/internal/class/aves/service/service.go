@@ -5,18 +5,22 @@ import (
 	"backend/internal/models"
 )
 
-type AvesService struct {
-	repo repository.AvesRepository
+// SpeciesService handles species-related business logic
+type SpeciesService struct {
+	repo *repository.SpeciesRepository
 }
 
-func (s *AvesService) GetAllSpecies() ([]models.Species, error) {
-	return s.repo.GetAllSpecies()
+// NewSpeciesService creates a new instance of SpeciesService
+func NewSpeciesService(repo *repository.SpeciesRepository) *SpeciesService {
+	return &SpeciesService{repo: repo}
 }
 
-func NewAvesService(repo repository.AvesRepository) *AvesService {
-	return &AvesService{repo: repo}
+// GetAllSpecies retrieves all species for a specific language
+func (s *SpeciesService) GetAllSpecies(languageCode string) ([]models.Species, error) {
+	return s.repo.GetAllSpecies(languageCode)
 }
 
-func (s *AvesService) GetSpeciesByCommonName(commonName string) (*models.Species, error) {
-	return s.repo.FindByCommonName(commonName)
+// GetSpeciesByCommonName retrieves a species by its common name and language
+func (s *SpeciesService) GetSpeciesByCommonName(languageCode, commonName string) (*models.Species, error) {
+	return s.repo.GetSpeciesByCommonName(languageCode, commonName)
 }

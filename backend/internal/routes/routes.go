@@ -8,6 +8,7 @@ import (
 	"log"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func SetupRoutes(e *echo.Echo) {
@@ -17,12 +18,14 @@ func SetupRoutes(e *echo.Echo) {
 		log.Fatal("Database connection failed:", err) // ถ้าเชื่อมต่อฐานข้อมูลไม่สําเร็จ
 	}
 
-	// สร้าง Repository, handler และ Service สำหรับ Aves
-	avesRepo := repository.NewAvesRepository(db)
-	avesService := service.NewAvesService(avesRepo)
-	avesHandler := handler.NewAvesHandler(avesService)
+	speciesRepo := repository.NewSpeciesRepository(db)
+	speciesService := service.NewSpeciesService(speciesRepo)
+	speciesHandler := handler.NewSpeciesHandler(speciesService)
 
-	// ตั้งค่า routes
-	e.GET("/api/v1/classes/aves/species", avesHandler.GetAllSpecies)                      // all species in table species
-	e.GET("/api/v1/classes/aves/species/:commonName", avesHandler.GetSpeciesByCommonName) // species by common name
+	// Middleware
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	e.GET("/:lang/classes/aves/species", speciesHandler.GetAllSpecies)
+	e.GET("/:lang/classes/aves/species/:common_name", speciesHandler.GetSpeciesByCommonName)
 }

@@ -21,6 +21,8 @@ var (
 	port     = os.Getenv("FEATHER_DB_PORT")
 )
 
+var DB *sql.DB
+
 func ConnectDB() (*sql.DB, error) {
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, database)
 	db, err := sql.Open("pgx", connStr)

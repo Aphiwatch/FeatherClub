@@ -1,8 +1,16 @@
 package models
 
 type Species struct {
+	ID                  int    `json:"id"`
+	ScientificName      string `json:"scientific_name"`
+	ParentGenusID       int    `json:"parent_genus_id"`
+	SpeciesTranslations []SpeciesTranslation
+}
+
+type SpeciesTranslation struct {
 	ID                  int     `json:"id"`
-	ScientificName      string  `json:"scientific_name"`
+	SpeciesID           int     `json:"species_id"`
+	LanguageCode        string  `json:"language_code"`
 	CommonName          *string `json:"common_name,omitempty"`
 	IUCNStatus          *string `json:"iucn_status,omitempty"`
 	ConservationStatus  *string `json:"conservation_status,omitempty"`
@@ -23,5 +31,4 @@ type Species struct {
 	EggsPerChick        *int64  `json:"eggs_per_chick,omitempty"`
 	ClutchDuration      *string `json:"clutch_duration,omitempty"`
 	ChickReadyToSea     *string `json:"chick_ready_to_sea,omitempty"`
-	ParentGenusID       int     `json:"parent_genus_id"`
 }
