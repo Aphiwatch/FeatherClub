@@ -9,9 +9,13 @@ export const routing = defineRouting({
   defaultLocale: 'en',
 
   pathnames:{
-    "/setting": {
-      en: "/setting",
-      th: "/ตั้งค่า"
+    "/support":{
+      en: "/support",
+      th: "/สนับสนุน"
+    },
+    "/feedback":{
+      en: "/feedback",
+      th: "/ข้อเสนอแนะ"
     },
   }
 });

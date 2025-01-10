@@ -1,6 +1,15 @@
 {
-    "HomePage":{
-        "title": "Home Pagel",
-        "setting": "Setting"
-    }
+  "HomePage": {
+    "title": "Home Pagel",
+    "setting": "Setting",
+    "general": "Gerneral"
+  },
+  "Sidebar": {
+    "NavMain": []
+    
+  },
+  "NavSecondary": {
+    "support": "Support",
+    "feedback": "Feedback"
+  }
 }

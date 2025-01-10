@@ -44,13 +44,9 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={`${geistMono.variable} ${prompt.variable}`}>
-        <SidebarProvider>
-          <AppSidebar />
           <NextIntlClientProvider messages={messages}>
-            <SidebarTrigger />
             {children}
           </NextIntlClientProvider>
-        </SidebarProvider>
       </body>
     </html>
   );

@@ -1,6 +1,14 @@
 {
-    "HomePage":{
-        "title": "หน้าหลัก",
-        "setting": "ตั้งค่า"
-    }
+  "HomePage": {
+    "title": "หน้าหลัก",
+    "setting": "ตั้งค่า",
+    "general": "ทั่วไป"
+  },
+  "Sidebar": {
+    "NavMain": {}
+  },
+  "NavSecondary": {
+    "support": "สนับสนุน",
+    "feedback": "ข้อเสนอแนะ"
+  }
 }
