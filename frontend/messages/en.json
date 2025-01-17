@@ -1,12 +1,20 @@
 {
   "HomePage": {
-    "title": "Home Pagel",
+    "title": "Home Page",
     "setting": "Setting",
     "general": "Gerneral"
   },
-  "Sidebar": {
-    "NavMain": []
-    
+  "NavMain": {
+    "home": "Home",
+    "introduction": "Introduction",
+    "whatIsBird": "What is Bird ?",
+    "taxonomy": "Taxonomy",
+    "species": "Species",
+    "search": "Search",
+    "lastest": "Lastest",
+    "recentlyUpdated": "Recently Updated",
+    "specialsInThailand": "Specials In Thailand",
+    "aboutUs": "About Us"
   },
   "NavSecondary": {
     "support": "Support",

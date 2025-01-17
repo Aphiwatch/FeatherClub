@@ -1,6 +1,6 @@
-import {Link} from '@/i18n/routing';
-import { getTranslations } from 'next-intl/server';
-import AppSidebar from "@/components/app-sidebar"
+import { Link } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
+import AppSidebar from "@/components/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,18 +8,18 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
-import LocaleSwitcher from '@/components/LocaleSwitcher';
- 
-export default async function HomePage() {
+} from "@/components/ui/sidebar";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
+import { ModeToggle } from "@/components/ModeToggle";
 
-  const t = await getTranslations('HomePage');
+export default async function HomePage() {
+  const t = await getTranslations("HomePage");
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -31,20 +31,15 @@ export default async function HomePage() {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="/">
-                  {t('title')}
-                  </BreadcrumbLink>
+                  <BreadcrumbLink href="/">{t("title")}</BreadcrumbLink>
                 </BreadcrumbItem>
-                {/* <BreadcrumbSeparator className="hidden md:block" /> */}
-                {/* <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem> */}
               </BreadcrumbList>
             </Breadcrumb>
           </div>
           <div>
-          <LocaleSwitcher />
+            <LocaleSwitcher />
           </div>
+          <ModeToggle />
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">

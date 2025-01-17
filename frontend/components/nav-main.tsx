@@ -1,6 +1,4 @@
-"use client";
-
-import { ChevronRight, LucideIcon, SquareTerminal } from "lucide-react";
+import { ChevronRight, Book, Bird, House, Pin } from "lucide-react";
 
 import {
   Collapsible,
@@ -8,6 +6,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import {
+  Sidebar,
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
@@ -17,100 +16,102 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 
-const navMain = {
-  title: "Introduction",
-  url: "#",
-  icon: SquareTerminal,
-  isActive: true,
-  items: [
-    {
-      title: "Aves",
-      url: "#",
-    },
-    {
-      title: "Taxonomy",
-      url: "#",
-    },
-    {
-      title: "Order",
-      url: "#",
-    },
-    {
-      title: "Family",
-      url: "#",
-    },
-    {
-      title: "Genus",
-      url: "#",
-    },
-    {
-      title: "Species",
-      url: "#",
-    },
-  ],
-};
-
-export function NavMain() {
+export default async function NavMain() {
+  const t = await getTranslations("NavMain");
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        <Collapsible key={navMain.title}>
+        {/* Home */}
+        <SidebarMenuItem>
+          <Link href="/">
+            <SidebarMenuButton>
+              <House />
+              <span>{t("home")}</span>
+            </SidebarMenuButton>
+          </Link>
+        </SidebarMenuItem>
+        {/* Collapsible introduction */}
+        <Collapsible asChild defaultOpen className="group/collapsible">
           <SidebarMenuItem>
             <CollapsibleTrigger asChild>
               <SidebarMenuButton>
-                {navMain.icon && <navMain.icon />}
-                <span>{navMain.title}</span>
+                <Book />
+                <span>{t("introduction")}</span>
                 <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
               </SidebarMenuButton>
             </CollapsibleTrigger>
             <CollapsibleContent>
               <SidebarMenuSub>
-                {navMain.items?.map((subItem) => (
-                  <SidebarMenuSubItem key={subItem.title}>
-                    <SidebarMenuSubButton asChild>
-                      <a href={subItem.url}>
-                        <span>{subItem.title}</span>
-                      </a>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                ))}
+                <SidebarMenuSubItem>
+                  {/* subbutton 1 */}
+                  <SidebarMenuSubButton asChild>
+                    <a href="/">
+                      <span>{t("whatIsBird")}</span>
+                    </a>
+                  </SidebarMenuSubButton>
+                  {/* subbutton 2 */}
+                  <SidebarMenuSubButton asChild>
+                    <a href="/">
+                      <span>{t("taxonomy")}</span>
+                    </a>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
               </SidebarMenuSub>
             </CollapsibleContent>
           </SidebarMenuItem>
         </Collapsible>
-        {/* {data.map((item) => (
-          <Collapsible
-            key={item.title}
-            asChild
-            defaultOpen={item.isActive}
-            className="group/collapsible"
-          >
-            <SidebarMenuItem>
-              <CollapsibleTrigger asChild>
-                <SidebarMenuButton tooltip={item.title}>
-                  {item.icon && <item.icon />}
-                  <span>{item.title}</span>
-                  <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
-                          <span>{subItem.title}</span>
-                        </a>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </SidebarMenuItem>
-          </Collapsible>
-        ))} */}
+        {/* Collapsible species */}
+        <Collapsible asChild defaultOpen className="group/collapsible">
+          <SidebarMenuItem>
+            <CollapsibleTrigger asChild>
+              <SidebarMenuButton>
+                <Bird />
+                <span>{t("species")}</span>
+                <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+              </SidebarMenuButton>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <SidebarMenuSub>
+                <SidebarMenuSubItem>
+                  {/* subbutton 1 */}
+                  <SidebarMenuSubButton asChild>
+                    <a href="/">
+                      <span>{t("search")}</span>
+                    </a>
+                  </SidebarMenuSubButton>
+                  {/* subbutton 2 */}
+                  <SidebarMenuSubButton asChild>
+                    <a href="/">
+                      <span>{t("lastest")}</span>
+                    </a>
+                  </SidebarMenuSubButton>
+                  {/* subbutton 3 */}
+                  <SidebarMenuSubButton asChild>
+                    <a href="/">
+                      <span>{t("recentlyUpdated")}</span>
+                    </a>
+                  </SidebarMenuSubButton>
+                  {/* subbutton 4 */}
+                  <SidebarMenuSubButton asChild>
+                    <a href="/">
+                      <span>{t("specialsInThailand")}</span>
+                    </a>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+              </SidebarMenuSub>
+            </CollapsibleContent>
+          </SidebarMenuItem>
+        </Collapsible>
+        {/* About us */}
+        <SidebarMenuItem>
+          <SidebarMenuButton>
+            <Pin />
+            <span>{t("aboutUs")}</span>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   );

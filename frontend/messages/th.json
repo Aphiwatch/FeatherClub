@@ -1,11 +1,20 @@
 {
   "HomePage": {
-    "title": "หน้าหลัก",
+    "title": "หน้าแรก",
     "setting": "ตั้งค่า",
     "general": "ทั่วไป"
   },
-  "Sidebar": {
-    "NavMain": {}
+  "NavMain": {
+    "home": "หน้าแรก",
+    "introduction": "แนะนำ",
+    "whatIsBird": "นกคืออะไร ?",
+    "taxonomy": "อนุกรมวิธาน",
+    "species": "สายพันธุ์",
+    "search": "ค้นหา",
+    "lastest": "ล่าสุด",
+    "recentlyUpdated": "อัปเดตล่าสุด",
+    "specialsInThailand": "เฉพาะในประเทศไทย",
+    "aboutUs": "เกี่ยวกับเรา"
   },
   "NavSecondary": {
     "support": "สนับสนุน",

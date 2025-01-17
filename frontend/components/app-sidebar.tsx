@@ -2,7 +2,7 @@ import {
   Command
 } from "lucide-react"
 
-import { NavMain } from "@/components/nav-main"
+import NavMain from "@/components/nav-main"
 // import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
@@ -14,17 +14,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import NavSecondary from "./nav-secondary"
-
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  
-  
-  
-}
 
 export default async function AppSidebar(){
   return (
