@@ -1,6 +1,6 @@
 {
   "HomePage": {
-    "title": "Home Page",
+    "title": "Feather Club",
     "setting": "Setting",
     "general": "Gerneral"
   },
@@ -14,10 +14,11 @@
     "lastest": "Lastest",
     "recentlyUpdated": "Recently Updated",
     "specialsInThailand": "Specials In Thailand",
-    "aboutUs": "About Us"
-  },
-  "NavSecondary": {
+    "aboutUs": "About Us",
     "support": "Support",
     "feedback": "Feedback"
+  },
+  "NavSecondary": {
+    
   }
 }

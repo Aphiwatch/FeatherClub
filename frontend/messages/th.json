@@ -1,6 +1,6 @@
 {
   "HomePage": {
-    "title": "หน้าแรก",
+    "title": "Feather Club",
     "setting": "ตั้งค่า",
     "general": "ทั่วไป"
   },
@@ -14,10 +14,11 @@
     "lastest": "ล่าสุด",
     "recentlyUpdated": "อัปเดตล่าสุด",
     "specialsInThailand": "เฉพาะในประเทศไทย",
-    "aboutUs": "เกี่ยวกับเรา"
-  },
-  "NavSecondary": {
+    "aboutUs": "เกี่ยวกับเรา",
     "support": "สนับสนุน",
     "feedback": "ข้อเสนอแนะ"
+  },
+  "NavSecondary": {
+    
   }
 }

@@ -6,6 +6,9 @@ import { Locale, routing } from "@/i18n/routing";
 import { Geist_Mono, Prompt } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import AppSidebar from "@/components/app-sidebar";
+import NavHeader from "@/components/NavHeader";
 
 const geistMono = Geist_Mono({
   variable: "--font-geistMono",
@@ -44,9 +47,17 @@ export default async function LocaleLayout({
     <>
       <html lang={locale}>
         <body className={`${geistMono.variable} ${prompt.variable}`}>
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
+          <ThemeProvider>
+            <NextIntlClientProvider messages={messages}>
+              <SidebarProvider>
+                <AppSidebar />
+                <SidebarInset>
+                  <NavHeader />
+                  {children}
+                </SidebarInset>
+              </SidebarProvider>
+            </NextIntlClientProvider>
+          </ThemeProvider>
         </body>
       </html>
     </>

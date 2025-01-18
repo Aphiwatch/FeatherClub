@@ -1,4 +1,4 @@
-import { ChevronRight, Book, Bird, House, Pin } from "lucide-react";
+import { ChevronRight, Book, Bird, House, Pin, LifeBuoy, Send } from "lucide-react";
 
 import {
   Collapsible,
@@ -17,7 +17,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 export default async function NavMain() {
   const t = await getTranslations("NavMain");
@@ -25,14 +25,15 @@ export default async function NavMain() {
     <SidebarGroup>
       <SidebarMenu>
         {/* Home */}
-        <SidebarMenuItem>
-          <Link href="/">
+        <SidebarMenuItem key="home">
+          <a href="/">
             <SidebarMenuButton>
               <House />
               <span>{t("home")}</span>
             </SidebarMenuButton>
-          </Link>
+          </a>
         </SidebarMenuItem>
+        
         {/* Collapsible introduction */}
         <Collapsible asChild defaultOpen className="group/collapsible">
           <SidebarMenuItem>
@@ -112,6 +113,24 @@ export default async function NavMain() {
             <span>{t("aboutUs")}</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
+        {/* Support menu */}
+        <SidebarMenuItem key="support">
+            <Link href="/support">
+              <SidebarMenuButton>
+                <LifeBuoy className="h-4 w-4" aria-hidden="true" />
+                <span>{t("support")}</span>
+              </SidebarMenuButton>
+            </Link>
+          </SidebarMenuItem>
+          {/* Feedback menu */}
+          <SidebarMenuItem key="feedback">
+            <Link href="/feedback">
+              <SidebarMenuButton>
+                <Send className="h-4 w-4" aria-hidden="true" />
+                <span>{t("feedback")}</span>
+              </SidebarMenuButton>
+            </Link>
+          </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   );
